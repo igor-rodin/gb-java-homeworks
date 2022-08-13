@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class NQeensProblem {
     public static void main(String[] args) {
-        int boardSize = 7;
+        final int boardSize = 8;
         boolean[][] chessBoard = new boolean[boardSize][boardSize];
 
         for (int i = 0; i < boardSize; i++) {
@@ -29,7 +29,7 @@ public class NQeensProblem {
         for (int row = 0; row < boardSize; row++) {
             if (isGoodPos(chessBoard, row, col)) {
                 chessBoard[row][col] = true;
-                if (nQeens(chessBoard, col + 1) == true)
+                if (nQeens(chessBoard, col + 1))
                     return true;
                 chessBoard[row][col] = false;
             }
