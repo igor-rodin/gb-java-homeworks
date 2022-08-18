@@ -19,10 +19,10 @@ public class SimplifyPath {
         String[] tokens = path.split("/");
 
         for (String token : tokens) {
-            if (token.length() != 0 & !token.equals(".") & !token.equals("..")) {
+            if (!token.isEmpty() && !token.equals(".") && !token.equals("..")) {
                 stack.push(token);
             }
-            if (token.equals("..") & !stack.isEmpty()) {
+            if (token.equals("..") && !stack.isEmpty()) {
                 stack.pop();
             }
         }

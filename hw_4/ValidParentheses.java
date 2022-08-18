@@ -14,23 +14,14 @@ public class ValidParentheses {
     }
 
     private static boolean isValid(String expression) {
-        Map<Character, Character> brackets = new HashMap<Character, Character>() {
-            {
-                put(')', '(');
-                put(']', '[');
-                put('}', '{');
-            }
-        };
+        Map<Character, Character> brackets = new HashMap<>(Map.of(')', '(', ']', '[', '}', '{'));
 
         Deque<Character> stack = new ArrayDeque<>();
 
         for (int i = 0; i < expression.length(); i++) {
             char bracket = expression.charAt(i);
             if (brackets.containsKey(bracket)) {
-                if (stack.isEmpty()) {
-                    return false;
-                }
-                if (brackets.get(bracket) != stack.pop()) {
+                if (stack.isEmpty() || brackets.get(bracket) != stack.pop()) {
                     return false;
                 }
             } else {
