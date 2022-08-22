@@ -10,7 +10,8 @@ import java.util.Set;
 public class CalcExpression {
     public static void main(String[] args) {
         // String mathExpr = "(13.5 - 2^3 + 4) / ( (-25 + 43) * (7-2))";
-        String mathExpr = "(13.5 - 0.5^3 + 1.4) / ( (-2.5 + 43) * (7-2))";
+        // String mathExpr = "(13.5 - 0.5^3 + 1.4) / ( (-2.5 + 43) * (7-2))";
+        String mathExpr = "(-2 + 3 * 2)";
 
         List<String> tokens = tokenize(mathExpr);
 
@@ -41,7 +42,7 @@ public class CalcExpression {
             } else if (Character.isDigit(expr.charAt(i)) && !isDigit) {
                 isDigit = true;
                 posDigit = i;
-                while (Character.isDigit(expr.charAt(i)) || expr.charAt(i) == '.') {
+                while (i < expr.length() && (Character.isDigit(expr.charAt(i)) || expr.charAt(i) == '.')) {
                     i++;
                 }
                 isDigit = false;
@@ -62,6 +63,9 @@ public class CalcExpression {
 
         Map<String, Integer> ops = new HashMap<>(Map.of("(", 1, "+", 2, "-", 2, "*", 3, "/", 3, "^", 4));
 
+        if (infix.get(0).equals("-")) {
+            postfix.add("0");
+        }
         for (int i = 0; i < infix.size(); i++) {
             String token = infix.get(i);
             if (token.equals("(")) {
